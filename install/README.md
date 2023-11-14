@@ -1,8 +1,8 @@
 ## Links
 
 - Primary documentation sites:
-    - [nginx.com docs](https://docs.nginx.com/nginx)
     - [nginx.org](https://nginx.org/en/docs)
+    - [nginx.com docs](https://docs.nginx.com/nginx)
 - Installing NGINX
     - [nginx.org linux install guide](https://nginx.org/en/linux_packages.html)
     - [nginx.com install guides](https://docs.nginx.com/nginx/admin-guide/installing-nginx/)
