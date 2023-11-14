@@ -14,6 +14,7 @@
 - `brew services start nginx` => start+register nginx to run on login
     - `brew services stop nginx` => stop+unregister
     - `brew services restart nginx`
+    - `run/kill` => don't register/unregister to run on login
 
 ## docker
 
