@@ -7,3 +7,5 @@
     - [nginx.org linux install guide](https://nginx.org/en/linux_packages.html)
     - [nginx.com install guides](https://docs.nginx.com/nginx/admin-guide/installing-nginx/)
         - [notably NGINX Open Source](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source)
+    - `brew install nginx` => config paths will be brew/mac specific
+    - `docker image pull nginx`
