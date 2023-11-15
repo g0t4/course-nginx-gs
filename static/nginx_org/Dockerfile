@@ -28,6 +28,7 @@ COPY --from=builder /nginx.org /nginx.org
 #   docker image build --output type=local,dest=./out/ .
 # FYI learn more about custom build outputs (--output/-o) =>
 # - https://docs.docker.com/engine/reference/commandline/build/#custom-build-outputs
+# - FYI not yet added to `docker compose build` => https://github.com/docker/compose/pull/10642
 
 #### OLD => hack to ensure xslt/* targets aren't rebuilt
 #   timestamp on xslt/* files must be after corresponding `xsls/*` dependency
