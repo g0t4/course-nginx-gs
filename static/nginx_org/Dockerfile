@@ -20,12 +20,14 @@ ENV PATH="/xslscript:${PATH}"
 # test what might be an rsync style deploy of built files?
 RUN mkdir -p /data/www/nginx.org
 RUN apt install -y rsync
-RUN make all gzip copy
-# ! RUN images? (TBD if needed)
-# `make all` builds html (from xml)
+RUN make images all gzip copy
+# key targets:
+#   `make images` produces /books, nginx.png, favicon.ico
+#   `make all` builds html (from xml)
 #   `make gzip` compresses pages (i.e. 2022.html => 2022.gz)
 #   `make copy` copies files to /data/www/nginx.org
-#   not needed: `make draft` appears to copy over to nested dir for prelim testing before `make copy` deploy
+#    not needed:
+#       `make draft` appears to copy over to nested dir for prelim testing before `make copy` deploy
 # FYI use `docker container diff` to find what was added with a given make target,
 # - i.e. comment out all make invocations, start builder ./run-builder.sh, then run `make images` followed by (on host) `docker container diff nginx<TAB>` => list of modified files!
 
