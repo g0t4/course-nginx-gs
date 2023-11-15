@@ -1,6 +1,5 @@
 services:
   nginx:
-    image: nginx # mainline/latest, stable
+    image: nginx # 1.25.3/mainline/latest, stable
     ports:
       - "8080:80"
-
