@@ -3,6 +3,4 @@ services:
     image: nginx # mainline/latest, stable
     ports:
       - "8080:80"
-# or:
-#  docker container run --rm -i -t -p 8080:80 nginx
 
