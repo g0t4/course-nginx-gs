@@ -1,0 +1,6 @@
+services:
+  builder:
+    image: weshigbee/nginx-org-build
+    build: .
+    # docker compose run --rm --build builder # => opens a shell
+    #   make # => builds nginx.org
