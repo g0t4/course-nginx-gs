@@ -1,5 +1,3 @@
-trash ./out # safe delete
-+# FYI this means you have to restart docker compose up to pick up changes b/c I am nuking bind mounted dir
+trash ./out/* # safe delete, only nested files so this doesn't mess up bind mount into compose container
 
 docker image build --output type=local,dest=out .
-
