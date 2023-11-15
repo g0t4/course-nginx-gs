@@ -1,27 +1,23 @@
 FROM gcc:bookworm as builder
 # gcc (make) + mercurial pkg (hg clone nginx.org repo)
 
-# TODO optimize script after find all of what is needed
+## install dependencies:
+RUN apt update && apt install -y xsltproc libxml2-utils netpbm rsync
 
-RUN hg clone https://hg.nginx.org/nginx.org/ /nginx.org
+
+## xslscript.pl:
 RUN hg clone https://hg.nginx.org/xslscript /xslscript
-WORKDIR /nginx.org
-
-RUN apt update
-RUN apt install -y xsltproc libxml2-utils
-# make images:
-RUN apt install -y netpbm
-
-# deps for xslscript.pl (see repo above)
 RUN cpan Parse::RecDescent
 # add xslscript.pl to PATH
 ENV PATH="/xslscript:${PATH}"
 
-# test what might be an rsync style deploy of built files?
+## clone nginx.org source:
+RUN hg clone https://hg.nginx.org/nginx.org/ /nginx.org
+WORKDIR /nginx.org
+
+## build nginx.org site => /data/www/nginx.org
 RUN mkdir -p /data/www/nginx.org
-RUN apt install -y rsync
 RUN make images all gzip copy
-# key targets:
 #   `make images` produces /books, nginx.png, favicon.ico
 #   `make all` builds html (from xml)
 #   `make gzip` compresses pages (i.e. 2022.html => 2022.gz)
@@ -31,14 +27,18 @@ RUN make images all gzip copy
 # FYI use `docker container diff` to find what was added with a given make target,
 # - i.e. comment out all make invocations, start builder ./run-builder.sh, then run `make images` followed by (on host) `docker container diff nginx<TAB>` => list of modified files!
 
+
 # second stage just for copying relevant files out of builder (nginx.org site files)
 FROM scratch as exporter
 COPY --from=builder /data/www/nginx.org /
-# only /nginx.org exists in this new image (stage) filesystem, so when I use local exporter it will only copy out /nginx.org
+# only /data/www/nginx.org dir exists in this new image (stage) filesystem (rooted at /), so when I use local exporter it will only copy out these files
 #   docker image build --output type=local,dest=./out/ .
 # FYI learn more about custom build outputs (--output/-o) =>
 # - https://docs.docker.com/engine/reference/commandline/build/#custom-build-outputs
 # - FYI not yet added to `docker compose build` => https://github.com/docker/compose/pull/10642
+
+
+
 
 #### OLD => hack to ensure xslt/* targets aren't rebuilt
 #   timestamp on xslt/* files must be after corresponding `xsls/*` dependency
