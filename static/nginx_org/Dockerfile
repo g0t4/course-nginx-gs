@@ -33,7 +33,7 @@ RUN make images all gzip copy
 
 # second stage just for copying relevant files out of builder (nginx.org site files)
 FROM scratch as exporter
-COPY --from=builder /data/www/nginx.org /nginx.org
+COPY --from=builder /data/www/nginx.org /
 # only /nginx.org exists in this new image (stage) filesystem, so when I use local exporter it will only copy out /nginx.org
 #   docker image build --output type=local,dest=./out/ .
 # FYI learn more about custom build outputs (--output/-o) =>
