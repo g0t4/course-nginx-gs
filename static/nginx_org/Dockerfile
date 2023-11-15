@@ -1,6 +1,8 @@
 FROM gcc:bookworm
 # gcc (make) + mercurial pkg (hg clone nginx.org repo)
 
+# TODO optimize script after find all of what is needed
+
 RUN hg clone https://hg.nginx.org/nginx.org/ /nginx.org
 RUN hg clone https://hg.nginx.org/xslscript /xslscript
 WORKDIR /nginx.org
