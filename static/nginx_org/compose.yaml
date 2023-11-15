@@ -1,6 +1,8 @@
 services:
   builder:
     image: weshigbee/nginx-org-build
-    build: .
+    build:
+      context: .
+      target: builder # explicit builder stage/target => so we can `run` container to test out build tools:
     # docker compose run --rm --build builder # => opens a shell
     #   make # => builds nginx.org
