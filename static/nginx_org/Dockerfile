@@ -17,15 +17,21 @@ RUN cpan Parse::RecDescent
 # add xslscript.pl to PATH
 ENV PATH="/xslscript:${PATH}"
 
-RUN make
-# RUN images? (TBD if needed)
+# test what might be an rsync style deploy of built files?
+RUN mkdir -p /data/www/nginx.org
+RUN apt install -y rsync
+RUN make all gzip copy
+# ! RUN images? (TBD if needed)
+# `make all` builds html (from xml)
+#   `make gzip` compresses pages (i.e. 2022.html => 2022.gz)
+#   `make copy` copies files to /data/www/nginx.org
+#   not needed: `make draft` appears to copy over to nested dir for prelim testing before `make copy` deploy
 # FYI use `docker container diff` to find what was added with a given make target,
 # - i.e. comment out all make invocations, start builder ./run-builder.sh, then run `make images` followed by (on host) `docker container diff nginx<TAB>` => list of modified files!
 
-
 # second stage just for copying relevant files out of builder (nginx.org site files)
 FROM scratch as exporter
-COPY --from=builder /nginx.org /nginx.org
+COPY --from=builder /data/www/nginx.org /nginx.org
 # only /nginx.org exists in this new image (stage) filesystem, so when I use local exporter it will only copy out /nginx.org
 #   docker image build --output type=local,dest=./out/ .
 # FYI learn more about custom build outputs (--output/-o) =>
