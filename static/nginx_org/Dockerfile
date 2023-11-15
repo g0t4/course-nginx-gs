@@ -19,6 +19,8 @@ ENV PATH="/xslscript:${PATH}"
 
 RUN make
 # RUN images? (TBD if needed)
+# FYI use `docker container diff` to find what was added with a given make target,
+# - i.e. comment out all make invocations, start builder ./run-builder.sh, then run `make images` followed by (on host) `docker container diff nginx<TAB>` => list of modified files!
 
 
 # second stage just for copying relevant files out of builder (nginx.org site files)
