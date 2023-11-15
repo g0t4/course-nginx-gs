@@ -1,3 +1,10 @@
+## precanned
+
+- Download precanned build of the nginx.org website files:
+- https://github.com/g0t4/course-nginx-gs/releases/tag/precanned_nginx_org
+
+## build
+
 ```bash
 
 # build ./out/nginx.org
