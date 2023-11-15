@@ -6,4 +6,4 @@ services:
       # - "8080:8080" # other nginx ports
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx_org:/nginx_org
+      - ./nginx_org/out/nginx.org:/nginx_org
