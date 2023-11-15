@@ -25,7 +25,9 @@ RUN make
 FROM scratch as exporter
 COPY --from=builder /nginx.org /nginx.org
 # only /nginx.org exists in this new image (stage) filesystem, so when I use local exporter it will only copy out /nginx.org
-#   docker image build -o type=local,dest=./out/ .
+#   docker image build --output type=local,dest=./out/ .
+# FYI learn more about custom build outputs (--output/-o) =>
+# - https://docs.docker.com/engine/reference/commandline/build/#custom-build-outputs
 
 #### OLD => hack to ensure xslt/* targets aren't rebuilt
 #   timestamp on xslt/* files must be after corresponding `xsls/*` dependency
