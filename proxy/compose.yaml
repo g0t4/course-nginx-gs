@@ -1,0 +1,18 @@
+services:
+  ghost:
+    image: ghost
+    ports:
+      - "2368:2368"
+    environment:
+      NODE_ENV: development
+      # url: http://localhost:2368
+  email:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      # - "1025:1025"
+  hello:
+    image: hashicorp/http-echo
+    command: ["-text", "Hello!"]
+    ports:
+      - "5678:5678"
