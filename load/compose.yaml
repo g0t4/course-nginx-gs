@@ -8,7 +8,14 @@ services:
     hostname: nginx
 
   # backends:
-  echo:
+  echo1:
     image: weshigbee/nginx-echo
     ports:
       - "5000:8080"
+    hostname: echo1
+  echo2:
+    image: weshigbee/nginx-echo
+    hostname: echo2
+  echo3:
+    image: weshigbee/nginx-echo
+    hostname: echo3
