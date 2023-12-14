@@ -13,3 +13,6 @@ trim_trailing_whitespace = true
 indent_size = 2
 
 # https://EditorConfig.org
+
+[.gitignore]
+end_of_line = unset
