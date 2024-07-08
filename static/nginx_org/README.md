@@ -1,3 +1,5 @@
+added course
+
 ## nginx_org builder
 
 This folder is arranged to help build the nginx.org website files using a reproducible container environment.
